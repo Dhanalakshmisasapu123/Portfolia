@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dhanalakshmi Sasapu - Portfolio</title>
+  <style>
+    :root {
+      --dark-blue: #003366;
+      --light-blue: #336699;
+      --background-light: #f4f4f9;
+      --background-dark: #121212;
+      --text-light: #000;
+      --text-dark: #eee;
+      --card-bg-light: #fff;
+      --card-bg-dark: #1e1e1e;
+      --highlight-light: #336699;
+      --highlight-dark: #5599ff;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--background-light);
+      color: var(--text-light);
+      margin: 0;
+      padding: 0 20px 40px 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+      background-color: var(--dark-blue);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 25px;
+      user-select: none;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section {
+      background-color: var(--card-bg-light);
+      border-radius: 10px;
+      padding: 20px 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .section h2 {
+      color: var(--dark-blue);
+      border-bottom: 2px solid var(--dark-blue);
+      padding-bottom: 8px;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    /* Education - table style */
+    table.education-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table.education-table th,
+    table.education-table td {
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table.education-table th {
+      background-color: var(--dark-blue);
+      color: white;
+      font-weight: 600;
+    }
+
+    /* Project cards */
+    .project {
+      border: 1px solid var(--light-blue);
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      transition: border-color 0.3s;
+    }
+
+    .project:hover {
+      border-color: var(--dark-blue);
+      box-shadow: 0 0 8px var(--dark-blue);
+    }
+
+    .project-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--dark-blue);
+      margin-bottom: 6px;
+    }
+
+    .project-desc {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      color: #333;
+    }
+
+    /* Contact details style */
+    .contact-info {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .contact-info a {
+      color: var(--dark-blue);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .contact-info a:hover {
+      color: var(--highlight-light);
+      text-decoration: underline;
+    }
+
+    /* Resume button */
+    .resume-btn {
+      background-color: var(--dark-blue);
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s;
+      user-select: none;
+    }
+
+    .resume-btn:hover {
+      background-color: var(--highlight-light);
+    }
+
+    /* Dark mode toggle */
+    .toggle-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: var(--dark-blue);
+    }
+
+    .toggle-container input[type="checkbox"] {
+      width: 40px;
+      height: 20px;
+      appearance: none;
+      background: #ccc;
+      border-radius: 20px;
+      position: relative;
+      outline: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .toggle-container input[type="checkbox"]:checked {
+      background: var(--dark-blue);
+    }
+
+    .toggle-container input[type="checkbox"]::before {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      top: 1px;
+      left: 1px;
+      background: white;
+      transition: 0.3s;
+    }
+
+    .toggle-container input[type="checkbox"]:checked::before {
+      left: 21px;
+    }
+
+    /* Dark mode styles */
+    body.dark {
+      background-color: var(--background-dark);
+      color: var(--text-dark);
+    }
+
+    body.dark .section {
+      background-color: var(--card-bg-dark);
+      box-shadow: none;
+    }
+
+    body.dark .section h2 {
+      color: var(--highlight-dark);
+      border-color: var(--highlight-dark);
+    }
+
+    body.dark .project {
+      border-color: var(--highlight-dark);
+      color: var(--text-dark);
+    }
+
+    body.dark .project:hover {
+      box-shadow: 0 0 12px var(--highlight-dark);
+    }
+
+    body.dark .contact-info a {
+      color: var(--highlight-dark);
+    }
+
+    body.dark .contact-info a:hover {
+      color: var(--highlight-light);
+    }
+
+    body.dark .resume-btn {
+      background-color: var(--highlight-dark);
+    }
+
+    body.dark .resume-btn:hover {
+      background-color: var(--highlight-light);
+    }
+
+    body.dark .toggle-container {
+      color: var(--highlight-dark);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body {
+        padding: 10px 15px 30px 15px;
+      }
+
+      header {
+        font-size: 2rem;
+        padding: 20px 10px;
+      }
+
+      .section {
+        padding: 15px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>Dhanalakshmi Sasapu</header>
+
+  <div class="toggle-container">
+    <label for="darkmode-toggle">Dark Mode</label>
+    <input type="checkbox" id="darkmode-toggle" />
+  </div>
+
+  <div class="container">
+    <section class="section" id="about">
+      <h2>About Me</h2>
+      <p>
+        Seeking an entry-level position in an organization where I can utilize my technical skills and passion for innovation to contribute to the development of the organization.
+      </p>
+    </section>
+
+    <section class="section" id="education">
+      <h2>Education</h2>
+      <table class="education-table">
+        <thead>
+          <tr>
+            <th>Degree / School</th>
+            <th>CGPA</th>
+            <th>Years</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>B.Tech in Information Technology – GMR Institute of Technology, Rajam</td>
+            <td>8.1</td>
+            <td>2021–2025</td>
+          </tr>
+          <tr>
+            <td>Intermediate +2 – SGCSR College, Rajam</td>
+            <td>9.38</td>
+            <td>2019–2021</td>
+          </tr>
+          <tr>
+            <td>Matriculation – Sudha High School, Dolapeta</td>
+            <td>9.7</td>
+            <td>2018–2019</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section" id="skills">
+      <h2>Skills</h2>
+      <p><strong>Technical Skills:</strong> Excel, Power BI, SQL, Front-end & Back-end Frameworks, Java, C</p>
+      <p><strong>Soft Skills:</strong> Creativity, Logical Thinking, Problem Solving, Leadership, Quick Learner</p>
+    </section>
+
+    <section class="section" id="projects">
+      <h2>Projects</h2>
+
+      <div class="project">
+        <div class="project-title">Spam Email Detection Using Machine Learning</div>
+        <div class="project-desc">
+          Built a spam email detection system using machine learning algorithms such as Naive Bayes, SVM, and Random Forest. Preprocessed email datasets, extracted features, and trained models to classify spam vs. non-spam. Evaluated accuracy, precision, and recall to optimize performance for real-world email filtering applications.
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-title">AI-Powered LMS using MERN Stack</div>
+        <div class="project-desc">
+          Built a full-stack Learning Management System using MERN with Clerk for authentication, Cloudinary for storage, and Stripe for payments. Integrated a chatbot via GorQ API and a rule-based course recommendation engine. Deployed on Vercel for fast and scalable delivery.
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-title">Hospital Database Management System Using SQL</div>
+        <div class="project-desc">
+          Developed a Hospital Database Management System using SQL to manage patient records, appointments, billing, and staff information. Designed relational schemas, implemented CRUD operations, and generated reports for efficient hospital administration.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <h2>Contact</h2>
+      <div class="contact-info">
+        <p>Email: <a href="mailto:dhanalakshmisasapu610@gmail.com">dhanalakshmisasapu610@gmail.com</a></p>
+        <p>Phone: <a href="tel:+918374249589">+91 8374249589</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/dhanalakshmi-sasapu" target="_blank" rel="noopener noreferrer">linkedin.com/in/dhanalakshmi-sasapu</a></p>
+      </div>
+      <a href="Dhanalakshmi_Sasapu_Resume.pdf" download class="resume-btn" aria-label="Download Resume">Download Resume</a>
+    </section>
+  </div>
+
+  <script>
+    const toggle = document.getElementById('darkmode-toggle');
+    toggle.addEventListener('change', () => {
+      document.body.classList.toggle('dark', toggle.checked);
+      localStorage.setItem('darkmode', toggle.checked);
+    });
+
+    // On page load, apply saved mode
+    window.addEventListener('load', () => {
+      const darkmode = localStorage.getItem('darkmode') === 'true';
+      toggle.checked = darkmode;
+      document.body.classList.toggle('dark', darkmode);
+    });
+  </script>
+</body>
+</html>
